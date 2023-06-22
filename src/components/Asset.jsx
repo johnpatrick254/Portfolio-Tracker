@@ -22,15 +22,13 @@ const Asset = ({ title, stocksAmount, startDate, percentage }) => {
     }
 
 
-
-
     useEffect(() => {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
+            'Accept': 'application/json',
 
+        }
         axios.request({
             method: 'GET',
             url: `https://api.polygon.io/v2/aggs/ticker/${title}/range/1/day/2021-08-09/${startDate}?apiKey=JlEDrWV0zabFFbJeEv044L8DwPgfjfI0`,
@@ -50,33 +48,25 @@ const Asset = ({ title, stocksAmount, startDate, percentage }) => {
 
         })
 
-
-
-    }, startDate)
-
-
-    useEffect(() => {
-
-        const headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-
-        }
-
         axios.request({
             method: 'GET',
-            url: `https://api.polygon.io/v2/aggs/ticker/${title}/range/1/day/${startDate}/${startDate}?apiKey=JlEDrWV0zabFFbJeEv044L8DwPgfjfI0`,
+            url: `https://api.polygon.io/v2/aggs/ticker/${title}/range/1/day/${startDate}/${startDate}?apiKey=qeSdCi_Iu1pTFRn4Pa4HjsKbClLDRj_S`,
             headers: headers
         }).then(res => {
             const { c: closingPrice, ...data } = res.data.results[0]
+            let balance = +closingPrice * +stocksAmount
             if (firstLoad) {
-                setBeginBalance(+closingPrice * stocksAmount);
+                setBeginBalance(balance);
+                console.log("first run")
             }
             setFirstLoad(false)
-            setCurrentBalance((+closingPrice * stocksAmount));
-            setpercentageGrowth((((beginBalnce - currentBalance)/beginBalnce)/beginBalnce));
+            setCurrentBalance(balance);
+        
+            let change = ((+currentBalance - +beginBalnce)/+beginBalnce)*100;
+            if(currentBalance | beginBalnce === 0) change=0;
+           setpercentageGrowth(change);
 
-            console.log(typeof(percentageGrowth))
+            console.log(typeof(currentBalance),":",closingPrice,currentBalance )
 
         })
     }, [startDate])
@@ -85,8 +75,8 @@ const Asset = ({ title, stocksAmount, startDate, percentage }) => {
         <li className={'showen'}>
             <div className='top'>
                 <h2>{title}</h2>
-                <span className={`${+percentageGrowth >= 0 ? 'green' : 'red'}`}>
-                    {`${+percentageGrowth > 0 ? `+${percentageGrowth}` : +percentageGrowth}`}%
+                <span className={percentageGrowth >= 0 ? 'green' : 'red'}>
+                    {percentageGrowth >= 0 ? `+${percentageGrowth}` : `-${percentageGrowth}`}%
                 </span>
             </div>
 
