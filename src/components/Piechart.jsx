@@ -67,7 +67,7 @@ export const PieChart = ({ piData }) => {
     }, [piData]);
 
     return (
-        <div style={{ width: "500px", height: "500px" }}>
+        <div className="pie" style={{ width: "500px", height: "500px" }}>
             <canvas id="pie-chart" ref={piRef} />
         </div>
     );

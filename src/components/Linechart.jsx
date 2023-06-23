@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Chart from "chart.js/auto";
 
-export const LineChart = ({ stock }) => {
+export const LineChart = ({ stock,title }) => {
     const chartRef = useRef(null);
     const [chartInstance, setChartInstance] = useState(null);
 
@@ -44,6 +44,7 @@ export const LineChart = ({ stock }) => {
 
     return (
         <div className="line-chart">
+          
             <canvas id="line-chart" ref={chartRef} />
         </div>
     );

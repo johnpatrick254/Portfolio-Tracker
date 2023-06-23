@@ -47,28 +47,35 @@ const Asset = ({ title, stocksAmount, startDate, percentage }) => {
             })
 
         })
-
+            try {
+                
         axios.request({
             method: 'GET',
             url: `https://api.polygon.io/v2/aggs/ticker/${title}/range/1/day/${startDate}/${startDate}?apiKey=qeSdCi_Iu1pTFRn4Pa4HjsKbClLDRj_S`,
             headers: headers
         }).then(res => {
-            const { c: closingPrice, ...data } = res.data.results[0]
-            let balance = +closingPrice * +stocksAmount
-            if (firstLoad) {
-                setBeginBalance(balance);
-                console.log("first run")
+            if(res.data.results[0]){
+                const { c: closingPrice, ...data } = res.data.results[0]
+                let balance = +closingPrice * +stocksAmount
+                if (firstLoad) {
+                    setBeginBalance(balance);
+                    console.log("first run")
+                }
+                setFirstLoad(false)
+                setCurrentBalance(balance);
+            
+                let change = (((+currentBalance) - (+beginBalnce))/+beginBalnce)*100;
+                if(currentBalance === 0) change=0;
+               setpercentageGrowth(change.toFixed(2));
+    
+                console.log(change,beginBalnce, currentBalance)
+    
             }
-            setFirstLoad(false)
-            setCurrentBalance(balance);
         
-            let change = ((+currentBalance - +beginBalnce)/+beginBalnce)*100;
-            if(currentBalance | beginBalnce === 0) change=0;
-           setpercentageGrowth(change);
-
-            console.log(typeof(currentBalance),":",closingPrice,currentBalance )
-
         })
+            } catch (error) {
+                console.log(error)
+            }
     }, [startDate])
 
     return (
@@ -76,7 +83,7 @@ const Asset = ({ title, stocksAmount, startDate, percentage }) => {
             <div className='top'>
                 <h2>{title}</h2>
                 <span className={percentageGrowth >= 0 ? 'green' : 'red'}>
-                    {percentageGrowth >= 0 ? `+${percentageGrowth}` : `-${percentageGrowth}`}%
+                    {percentageGrowth >= 0 ? `+${percentageGrowth}` : `${percentageGrowth}`}%
                 </span>
             </div>
 
@@ -100,7 +107,7 @@ const Asset = ({ title, stocksAmount, startDate, percentage }) => {
                     </p>
                 </div>
                 <article className='chart'>
-                    <LineChart stock={chartData} />
+                    <LineChart stock={chartData} title={title} />
                 </article>
             </div>
         </li>
