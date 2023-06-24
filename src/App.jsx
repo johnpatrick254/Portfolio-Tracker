@@ -47,12 +47,11 @@ function App() {
   const [beginBalnce, setBeginBalance] = useState(null)
   const [firstLoad, setFirstLoad] = useState(true)
   const [currentBalance, setCurrentBalance] = useState(0)
-  const [isloading,setIsLoading] =useState(false)
+  const [isloading, setIsLoading] = useState(false)
 
 
   const fetchStocks = async (startDate) => {
 
-    setIsLoading(true);
     const data = await axios.request({
       method: 'get',
       url: `https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/${startDate}?adjusted=true&apiKey=JlEDrWV0zabFFbJeEv044L8DwPgfjfI0`,
@@ -117,22 +116,23 @@ function App() {
     }
     setPieData(adjPortfolio);
     setIsLoading(false);
-
+    
   }
-
+  
   useEffect(() => {
-
+    
     try {
-
+      
       if (!firstLoad) {
         fetchStocks(startDate);
-
+        
       }
+      setIsLoading(false);
 
     } catch (err) {
-    alert("API LIMIT REACHED, refresh and wait for a minute");
-    setIsLoading(false);
-    console.log(err);
+      alert("API LIMIT REACHED, refresh and wait for a minute");
+      setIsLoading(false);
+      console.log(err);
     }
 
   }, [startDate])
@@ -141,6 +141,7 @@ function App() {
     <>
       <Navbar />
       <Stocks ref={buttRef} loading={isloading} ref_Function={() => {
+        setIsLoading(true);
         let data = buttRef.current.handleSubmit();
         setPortFolio(data);
         setStartDate(data[0].date)
@@ -161,9 +162,9 @@ function App() {
         </p>
         <p>
           <span className='title'>Growth</span>
-          <span className={`data ${currentBalance-beginBalnce > 0 ? 'green' : 'red'}`}>
-            {currentBalance -beginBalnce > 0 ?
-              `+${(currentBalance -beginBalnce.toFixed(2))} USD`
+          <span className={`data ${currentBalance - beginBalnce > 0 ? 'green' : 'red'}`}>
+            {currentBalance - beginBalnce > 0 ?
+              `+${(currentBalance - beginBalnce.toFixed(2))} USD`
               :
               `${(currentBalance - beginBalnce).toFixed(2)} USD`
             }
@@ -171,7 +172,7 @@ function App() {
         </p>
       </div>
 
-      <PieChart piData={pie_data}  />
+      <PieChart piData={pie_data} />
 
     </>
   )

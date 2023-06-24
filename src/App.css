@@ -6,6 +6,7 @@
   display: grid;
   grid-template-areas: 
   "nav nav nav nav  "
+  "pied pied pied pied  "
   "pie pie stock stock  "
   "pie pie stock stock  "
   "cards cards cards cards  "

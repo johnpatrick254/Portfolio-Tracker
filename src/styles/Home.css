@@ -12,11 +12,13 @@
   width: calc(100% - 400px);
   border-radius: 8px;
   padding: 40px 50px;
+  font-size: 1rem !important;
 }
 .portfolio h2 {
   position: absolute;
   left: 50px;
   top: 0;
+  font-size: 1rem !important;
   transform: translateY(-60%);
   color: #215abd;
   background-color: #fff;
@@ -24,16 +26,18 @@
 }
 
 .Portfolio-status {
-  grid-area: pie;
-  align-self: top;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 40px 1rem;
+    font-size: 1rem !important;
+    grid-area: pied;
+    place-self: center;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    /* justify-content: space-between; */
+    gap: 40px 1rem;
 }
 .Portfolio-status p {
-  display: flex;
+    font-size: 0.75rem !important;
+    display: flex;
   align-items: center;
   justify-content: flex-start;
   width: fit-content;
@@ -62,10 +66,10 @@
 
 .portfolio-chart {
   width: fit-content;
-  /* height: 400px; */
-  /* width: 100%; */
-  margin-inline: auto;
-  margin-top: 40px;
+  /* height:200px;
+  width: 100%; */
+  /* margin-inline: auto; */
+  /* margin-top: 40px; */
 }
 
 ul {
@@ -290,13 +294,14 @@ input {
   align-items: center;
   justify-content: center;
   /* width:5rem; */
-  font-size: 1.2rem;
+  font-size: 0.85rem;
   font-weight: 700;
   gap: 0.7rem;
 }
 .date input {
-  font-size: 1.2rem;
+  font-size: 0.7rem;
   width: 9rem;
+  height: 2rem;
 }
 
 .innit-amount {
@@ -304,11 +309,12 @@ input {
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 0.7rem;
   gap: 1rem;
 }
 .innit-amount input {
   width: 10rem;
+  height: 2rem;
 }
 .err {
   width: 100%;
@@ -319,7 +325,7 @@ input {
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 0.7rem;
   gap: 1rem;
 }
 
@@ -329,11 +335,11 @@ input {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  font-size: 1rem;
-  height: 3rem;
+  font-size: 0.7rem;
+  height: 2rem;
 }
 .stock-input span {
-  font-size: 2rem;
+  font-size: 1rem;
 }
 .stock-input input {
   width: 20%;
@@ -343,8 +349,8 @@ input {
   margin-top: 2rem;
 }
 .submit button {
-  font-size: 2rem;
-  padding: 0.2em;
+  font-size: 1.3rem;
+  padding: 0.4em 0.2em;
   border-radius: 6px;
   background-color: #000000;
 }
@@ -360,11 +366,12 @@ input {
   grid-area: pie;
   place-self: center;
   align-self: center;
+  height: 25rem !important;
+  width: 25rem !important;
 }
 
 .loading {
-    animation: loading linear 2s infinite  ;
-}
+    animation: loading infinite 300ms 100ms alternate;}
 
 @keyframes loading {
   0% {
