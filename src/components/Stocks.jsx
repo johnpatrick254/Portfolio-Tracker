@@ -60,6 +60,7 @@ const Stocks = forwardRef((props, ref) => {
     const refresh = () => {
         const sum = Number(apple) + Number(amd) + Number(tsla) + Number(msft);
         setAmount(sum);
+        setAmountStart(amountStart)
         setDate(date);
     }
     useEffect(() => {
@@ -107,7 +108,7 @@ const Stocks = forwardRef((props, ref) => {
         setPortFolio(userInput)
 
 
-    }, [amd, tsla, apple, msft, date]);
+    }, [amd, tsla, apple, msft, date,amountStart]);
 
 
 

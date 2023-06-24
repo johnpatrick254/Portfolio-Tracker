@@ -129,8 +129,11 @@ function App() {
     
     try {
       
+      setIsLoading(true);
       if (!firstLoad) {
+        
         fetchStocks(startDate);
+        setIsLoading(false);
         
       }
       setIsLoading(false);
@@ -141,21 +144,18 @@ function App() {
       console.log(err);
     }
 
-  }, [startDate])
+  }, [startDate,beginBalnce])
 
   return (
     <>
       <Navbar />
       <Stocks ref={buttRef} loading={isloading} ref_Function={() => {
+        setFirstLoad(false)
         let data = buttRef.current.handleSubmit();
         setPortFolio(data);
         setStartDate(data[0].date)
-        if (firstLoad) {
-          setBeginBalance(data[0].totals)
-        }
-        setFirstLoad(false)
+        setBeginBalance(data[0].totals)
         setCurrentBalance(data[0].totals);
-        setIsLoading(true);
 
       }} />
       <div className='Portfolio-status'>
