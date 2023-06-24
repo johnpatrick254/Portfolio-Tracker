@@ -148,7 +148,7 @@ function App() {
       console.log(err);
     }
 
-  }, [startDate, beginBalnce])
+  }, [startDate, beginBalnce,portfolio])
 
   return (
     <>
