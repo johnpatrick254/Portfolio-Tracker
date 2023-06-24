@@ -65,6 +65,12 @@ function App() {
     let apl_pr;
     let tsl_pr;
     let msf_pr;
+
+      console.log(data)
+    if(!data){
+      alert("API LIMIT REACHED, refresh and wait for a minute");
+      setIsLoading(false);
+    }
     data.map(ticker => {
       switch (ticker.T) {
         case 'AAPL':
