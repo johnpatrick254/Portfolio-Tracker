@@ -3,7 +3,6 @@
 import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 
 const Stocks = forwardRef((props, ref) => {
-    console.log(ref)
 
     const [apple, setApple] = useState('');
     const [amd, setAmd] = useState('');
@@ -18,7 +17,7 @@ const Stocks = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => {
 
-       return {
+        return {
             refresh,
             handleSubmit
         }
@@ -64,26 +63,44 @@ const Stocks = forwardRef((props, ref) => {
         setDate(date);
     }
     useEffect(() => {
+        const sum = Number(apple) + Number(amd) + Number(tsla) + Number(msft);
         const userInput = [
             {
                 title: "AAPL",
+                percent:apple,
                 value: (apple * amountStart) / 100,
-                date: date
+                date: date,
+                totals: amountStart,
+
+                shares: +(((apple * amountStart) / 100) / 186.68).toFixed(2)
             },
             {
                 title: "MFST",
+                percent:msft,
                 value: (msft * amountStart) / 100,
-                date: date
+                date: date,
+                totals: amountStart,
+                shares: +(((msft * amountStart) / 100) / 335.02
+                ).toFixed(2)
             },
             {
                 title: "TSLA",
-                value: (tsla * amountStart) / 100,
-                date: date
+                percent:tsla,
+                value: +(tsla * amountStart) / 100,
+                date: date,
+                totals: amountStart,
+                shares: +(((tsla * amountStart) / 100) / 256.60
+                ).toFixed(2)
             },
             {
                 title: "AMD",
+                percent:amd,
                 value: (amd * amountStart) / 100,
-                date: date
+                date: date,
+                totals: amountStart,
+                shares: +(((amd * amountStart) / 100) / 110.01
+
+                ).toFixed(2)
             },
 
         ];
@@ -189,7 +206,7 @@ const Stocks = forwardRef((props, ref) => {
                 </div>
 
 
-                <div className="submit">
+                <div className={`${props.loading && 'loading'} submit`}>
                     <button onMouseEnter={refresh} onClick={props.ref_Function}>Submit</button>
                 </div>
 

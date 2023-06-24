@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 
 
-export const PieChart = ({ piData }) => {
+export const PieChart = ({ piData,loading }) => {
     const piRef = useRef(null);
     const [piChartInstance, setPiChartInstance] = useState(null);
 
@@ -67,7 +67,7 @@ export const PieChart = ({ piData }) => {
     }, [piData]);
 
     return (
-        <div className="pie" style={{ width: "500px", height: "500px" }}>
+        <div className={`pie`} style={{ width: "500px", height: "500px" }}>
             <canvas id="pie-chart" ref={piRef} />
         </div>
     );
