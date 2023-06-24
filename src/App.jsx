@@ -66,11 +66,11 @@ function App() {
     let tsl_pr;
     let msf_pr;
 
-      console.log(data)
-    if(!data){
+    if (!data) {
       alert("API LIMIT REACHED, refresh and wait for a minute");
       setIsLoading(false);
     }
+    console.log(data)
     data.map(ticker => {
       switch (ticker.T) {
         case 'AAPL':
@@ -122,21 +122,25 @@ function App() {
     }
     setPieData(adjPortfolio);
     setIsLoading(false);
-    
+
+
+
   }
-  
+
   useEffect(() => {
-    
+    setIsLoading(true);
+
     try {
-      
-      setIsLoading(true);
+
       if (!firstLoad) {
-        
+
         fetchStocks(startDate);
+
+      } else {
+
         setIsLoading(false);
-        
+        console.log("first run")
       }
-      setIsLoading(false);
 
     } catch (err) {
       alert("API LIMIT REACHED, refresh and wait for a minute");
@@ -144,18 +148,26 @@ function App() {
       console.log(err);
     }
 
-  }, [startDate,beginBalnce])
+  }, [startDate, beginBalnce])
 
   return (
     <>
       <Navbar />
       <Stocks ref={buttRef} loading={isloading} ref_Function={() => {
         setFirstLoad(false)
+        setIsLoading(true)
         let data = buttRef.current.handleSubmit();
         setPortFolio(data);
         setStartDate(data[0].date)
         setBeginBalance(data[0].totals)
         setCurrentBalance(data[0].totals);
+
+        setTimeout(() => {
+          setIsLoading(false);
+
+        }, 3500)
+
+        console.log(portfolio)
 
       }} />
       <div className='Portfolio-status'>

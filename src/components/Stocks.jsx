@@ -208,7 +208,7 @@ const Stocks = forwardRef((props, ref) => {
 
 
                 <div className={`${props.loading && 'loading'} submit`}>
-                    <button onMouseEnter={refresh} onClick={props.ref_Function}>Submit</button>
+                    <button onMouseEnter={refresh} onClick={props.ref_Function}>{props.loading ? "Loading":"Submit"}</button>
                 </div>
 
             </div>
