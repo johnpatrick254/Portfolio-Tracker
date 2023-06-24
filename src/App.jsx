@@ -108,10 +108,10 @@ function App() {
     let msf_g = (((+msf_pr / tt) * 100)) - portfolio[3].percent;
 
 
-    let amd = `AMD: USD${amd_pr.toFixed(2)} / ${amd_g > 0 ? `+ ${+amd_g.toFixed()}` : amd_g.toFixed()}%`;
-    let apl = `AAPL: USD${apl_pr.toFixed(2)} / ${apl_g > 0 ? `+ ${apl_g.toFixed()}` : apl_g.toFixed()}%`;
-    let tsl = `TSLA: USD${tsl_pr.toFixed(2)} / ${tsl_g > 0 ? `+ ${tsl_g.toFixed()}` : tsl_g.toFixed()}%`;
-    let msf = `MSFT: USD${msf_pr.toFixed(2)} / ${msf_g > 0 ? `+ ${msf_g.toFixed()}` : msf_g.toFixed()}%`;
+    let amd = `AMD: USD ${amd_pr.toFixed(2)} | ${amd_g > 0 ? `+ ${+amd_g.toFixed()}` : amd_g.toFixed()}%`;
+    let apl = `AAPL: USD ${apl_pr.toFixed(2)} | ${apl_g > 0 ? `+ ${apl_g.toFixed()}` : apl_g.toFixed()}%`;
+    let tsl = `TSLA: USD ${tsl_pr.toFixed(2)} | ${tsl_g > 0 ? `+ ${tsl_g.toFixed()}` : tsl_g.toFixed()}%`;
+    let msf = `MSFT: USD ${msf_pr.toFixed(2)} | ${msf_g > 0 ? `+ ${msf_g.toFixed()}` : msf_g.toFixed()}%`;
 
 
     let adjPortfolio = {
@@ -147,7 +147,6 @@ function App() {
     <>
       <Navbar />
       <Stocks ref={buttRef} loading={isloading} ref_Function={() => {
-        setIsLoading(true);
         let data = buttRef.current.handleSubmit();
         setPortFolio(data);
         setStartDate(data[0].date)
@@ -155,7 +154,9 @@ function App() {
           setBeginBalance(data[0].totals)
         }
         setFirstLoad(false)
-        setCurrentBalance(data[0].totals)
+        setCurrentBalance(data[0].totals);
+        setIsLoading(true);
+
       }} />
       <div className='Portfolio-status'>
         <p>

@@ -369,7 +369,10 @@ input {
   height: 25rem !important;
   width: 25rem !important;
 }
-
+#pie-chart{
+    width: 100% !important;
+    height: 100% !important;
+}
 .loading {
     animation: loading infinite 300ms 100ms alternate;}
 

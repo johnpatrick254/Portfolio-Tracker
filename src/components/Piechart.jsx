@@ -24,14 +24,14 @@ export const PieChart = ({ piData,loading }) => {
                     {
                         label: "Amount in USD",
                         data: data,
-                        backgroundColor: [
-                            "rgba(255, 99, 132, 1)",
-                            "rgba(54, 162, 235, 1)",
-                            "rgba(255, 206, 86, 1)",
-                            "rgba(75, 192, 192, 1)",
-                            "rgba(153, 102, 255, 1)",
-                            "rgba(230, 125, 34, 1)",
-                        ],
+                        // backgroundColor: [
+                        //     "rgba(255, 99, 132, 1)",
+                        //     "rgba(54, 162, 235, 1)",
+                        //     "rgba(255, 206, 86, 1)",
+                        //     "rgba(75, 192, 192, 1)",
+                        //     "rgba(153, 102, 255, 1)",
+                        //     "rgba(230, 125, 34, 1)",
+                        // ],
                         borderWidth: 0,
                     },
                 ],
@@ -41,6 +41,12 @@ export const PieChart = ({ piData,loading }) => {
                 plugins: {
                     legend: {
                         position: "bottom",
+                        labels: {
+                            color: 'rgb(255, 255, 255)',
+                            font: {
+                                size: 15
+                            }
+                        }
                     },
                     title: {
                         display: true,
